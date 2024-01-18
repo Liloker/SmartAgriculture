@@ -1,0 +1,8 @@
+Flask==2.3.2
+# flask-sockets==0.2.1
+# Flask-SocketIO==5.3.4
+Flask-SQLAlchemy==3.0.2
+pymysql==0.7.11
+gevent
+gevent-websocket
+websocket-client

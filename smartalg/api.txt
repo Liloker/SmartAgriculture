@@ -1,0 +1,461 @@
+
+
+1. 获取历史时段的传感器数据
+/api/sensordata/history : POST
+入参: 
+{
+    "greenhouse_id":1,
+    "start_date":"2023-05-11 12:12:12",
+    "end_date":"2023-05-12 12:12:12"
+}
+返回:
+{
+    "status": 200,
+    "msg": "success",
+    "data": [
+        {
+            "id": 121,"greenhouse_id": 2,
+            "carbon_dioxide": 1669,
+            "air_temperature": 37,
+            "air_moisture": 61,
+            "light_intensity": 93,
+            "soil_temperature": 11,
+            "soil_moisture": 17,
+            "dt": "2023-05-14 18:13:26"
+        },
+        {
+            "id": 122,
+            "greenhouse_id": 2,
+            "carbon_dioxide": 1900,
+            "air_temperature": 24,
+            "air_moisture": 38,
+            "light_intensity": 52,
+            "soil_temperature": 11,
+            "soil_moisture": 94,
+            "dt": "2023-05-14 18:13:27"
+        },
+        {
+            "id": 123,
+            "greenhouse_id": 2,
+            "carbon_dioxide": 1874,
+            "air_temperature": 22,
+            "air_moisture": 48,
+            "light_intensity": 40,
+            "soil_temperature": 3,
+            "soil_moisture": 71,
+            "dt": "2023-05-14 18:13:28"
+        }
+    ]
+}
+
+2. 触发获取实时传感器数据
+/api/sensordata/realtime : POST
+入参: {"greenhouse_id":1}
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": {}
+}
+
+
+
+
+3. 所有传感器列表
+/api/sensor/list : GET/POST
+入参: 空
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": [
+        {"id":1,"name":"温度传感器11","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100},
+        {"id":2,"name":"温度传感器11","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100},
+        {"id":3,"name":"温度传感器11","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100}
+    ]
+}
+
+
+
+4. 新增传感器
+/api/sensor/add : POST
+入参: 
+{
+    "name":"传感器11",
+    "sensor_type":"温度传感器",
+    "position":"3行5列",
+    "greenhouse_id":1,
+    "alert_threshold":100
+}
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": [
+        {"id":1,"name":"温度传感器11","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100},
+        {"id":2,"name":"温度传感器11","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100},
+        {"id":3,"name":"温度传感器11","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100}
+    ]
+}
+
+
+5. 编辑更新传感器信息
+/api/sensor/update : POST
+入参: 
+{
+    "id":1,
+    "name":"传感器11",
+    "sensor_type":"温度传感器",
+    "position":"3行5列",
+    "greenhouse_id":1,
+    "alert_threshold":100
+}
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": [
+        {"id":1,"name":"温度传感器11","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100},
+        {"id":2,"name":"温度传感器11","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100},
+        {"id":3,"name":"温度传感器11","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100}
+    ]
+}
+
+6. 删除传感器
+/api/sensor/delete : POST
+入参: {"id":1}
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": {}
+}
+
+
+7. 按大棚筛选传感器
+/api/sensor/filter : POST
+入参：{"greenhouse_id":1}
+返回：
+{
+    "status": 200,
+    "msg": "success",
+    "data": [
+        {"id":1,"name":"小i温度传感器11","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100},
+        {"id":2,"name":"温度传感器12","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100},
+        {"id":3,"name":"温度传感器13","sensor_type":"温度传感器","position":"3行5列","greenhouse_id":1,"greenhouse_name":"大棚1","alert_threshold":100}
+    ]
+}
+
+
+8. 上传图片并识别病虫害结果
+/api/upload/rec : POST
+请求类型: form-data
+表单中保存图片数据的字段: image
+表单中保存大棚id的字段: greenhouse_id
+入参: 表单提交图片files
+返回:
+{
+    "data": "识别结果文字",
+    "msg": "success",
+    "status": 200
+}
+
+
+
+9. 获取识别图片历史接口
+/api/upload/history : POST
+入参: {"greenhouse_id":1}
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": [
+        {"id":1,"image_name":"xxx","path":"xxx","rec_result":"xxx","pest_num":12,"greenhouse_name":"name","rec_date":"2023-05-17 12:12:12"},
+        {"id":2,"image_name":"xxx","path":"xxx","rec_result":"xxx","pest_num":12,"greenhouse_name":"name","rec_date":"2023-05-17 12:12:12"},
+        {"id":3,"image_name":"xxx","path":"xxx","rec_result":"xxx","pest_num":12,"greenhouse_name":"name","rec_date":"2023-05-17 12:12:12"}
+    ]
+}
+
+10. 查看图片
+/api/upload/view : POST
+入参: {"pest_inspection_id":1}
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": "imagebase64code"
+}
+
+11. 删除识别记录，同时删除图片
+/api/upload/delete : POST
+入参: {"pest_inspection_id":1}
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": {}
+}
+
+
+12. 获取大棚列表
+/api/greenhouse/list : GET/POST
+入参: 空
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": [
+        {"id":1, "name":"xxx", "count":6},
+        {"id":2, "name":"xxx", "count":6}
+    ]
+}
+
+
+
+13. 新增大棚
+/api/greenhouse/add : POST
+入参: {"name":"西部一号温室"}
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": [
+        {"id":1, "name":"西部一号温室", "count":0},
+        {"id":2, "name":"xxx", "count":6}
+    ]
+}
+
+14. 编辑大棚名称
+/api/greenhouse/update : POST
+入参: 
+{
+    "id":1,
+    "name":"西部二号温室"
+}
+返回: 
+{
+    "status": 200,
+    "msg": "success",
+    "data": [
+        {"id":1, "name":"西部二号温室", "count":0},
+        {"id":2, "name":"xxx", "count":6}
+    ]
+}
+
+
+15. 获取农产品种植物信息列表
+/api/farmproduct/list : GET/POST
+入参: 空
+返回: {
+    "data": [
+        {
+            "id": 1,
+            "name": "西红柿",
+            "greenhouse_name": "西部二号温室",
+            "latest_date": "2023-05-19"
+        },
+        {
+            "id": 2,
+            "name": "西蓝花",
+            "greenhouse_name": "西部一号温室",
+            "latest_date": "2023-05-19"
+        }
+    ],
+    "msg": "success",
+    "status": 200
+}
+
+
+16. 新增农产品种植物
+/api/farmproduct/add : POST
+入参:
+{
+    "name":"胡萝卜",
+    "greenhouse_id":1
+}
+返回:
+返回: {
+    "data": [
+        {
+            "id": 1,
+            "name": "胡萝卜",
+            "greenhouse_name": "西部一号温室",
+            "latest_date": "" // 新增的这个是空的
+        },
+        {
+            "id": 2,
+            "name": "西蓝花",
+            "greenhouse_name": "西部一号温室",
+            "latest_date": "2023-05-19"
+        }
+    ],
+    "msg": "success",
+    "status": 200
+}
+
+17. 删除农产品种植物
+/api/farmproduct/delete : POST
+入参: {
+    "farmproduct_id":1
+}
+返回: {
+    "data": [
+        {
+            "id": 2,
+            "name": "西蓝花",
+            "greenhouse_name": "西部一号温室",
+            "latest_date": "2023-05-19"
+        }
+    ],
+    "msg": "success",
+    "status": 200
+}
+
+18. 编辑农产品种植物信息
+/api/farmproduct/update : POST
+入参: 
+{
+    "farmproduct_id":2,
+    "name":"胡萝卜222",
+    "greenhouse_id":2
+}
+返回: {
+    "data": [
+        {
+            "id": 2,
+            "name": "胡萝卜222",
+            "greenhouse_name": "西部二号温室",
+            "latest_date": "2023-05-19"
+        }
+    ],
+    "msg": "success",
+    "status": 200
+}
+
+
+19. 获取生产周期列表
+/api/productcycle/list : POST
+入参:
+{
+    "farmproduct_id":1
+}
+返回:
+{
+    "data": {
+        "farmproduct_id":1,
+        "farmproduct_name":"黄瓜",
+        "greenhouse_id":2,
+        "greenhouse_name":"大棚1",
+        "cycle":[
+            {
+                "cycle_name": "播种",
+                "date": "2023-05-28",
+                "id": 1
+            },
+            {
+                "cycle_name": "开花",
+                "date": "2023-07-28",
+                "id": 2
+            },
+            {
+                "cycle_name": "施肥",
+                "date": "2023-08-28",
+                "id": 3
+            }
+        ]
+    },
+    "msg": "success",
+    "status": 200
+}
+
+
+
+20. 新增一个生产周期
+/api/productcycle/add : POST
+入参:
+{
+    "farmproduct_id":1
+}
+返回:
+{
+    "data": {
+        "farmproduct_id":1,
+        "farmproduct_name":"黄瓜",
+        "greenhouse_id":2,
+        "greenhouse_name":"大棚1",
+        "cycle":[
+            {
+                "cycle_name": "播种",
+                "date": "2023-05-28",
+                "id": 1
+            },
+            {
+                "cycle_name": "", // 新增的那个，没有详细信息，只生成一个id
+                "date": "",
+                "id": 2
+            }
+        ]
+    },
+    "msg": "success",
+    "status": 200
+}
+
+
+
+21. 保存生产周期
+/api/productcycle/update : POST
+入参: 
+{
+    "productcycle_id":2,
+    "cycle_name":"开花",
+    "date":"2023-08-29"
+}
+返回:
+{
+    "data": {
+        "farmproduct_id":1,
+        "farmproduct_name":"黄瓜",
+        "greenhouse_id":2,
+        "greenhouse_name":"大棚1",
+        "cycle":[
+            {
+                "cycle_name": "播种",
+                "date": "2023-05-28",
+                "id": 1
+            },
+            {
+                "cycle_name": "开花", // 新增的那个，没有详细信息，只生成一个id
+                "date": "2023-08-29",
+                "id": 2
+            }
+        ]
+    },
+    "msg": "success",
+    "status": 200
+}
+
+
+22. 删除某个周期
+/api/productcycle/delete : POST
+入参:
+{
+    "productcycle_id":2
+}
+返回:
+{
+    "data": {
+        "farmproduct_id":1,
+        "farmproduct_name":"黄瓜",
+        "greenhouse_id":2,
+        "greenhouse_name":"大棚1",
+        "cycle":[
+            {
+                "cycle_name": "播种",
+                "date": "2023-05-28",
+                "id": 1
+            }
+        ]
+    },
+    "msg": "success",
+    "status": 200
+}
