@@ -1,6 +1,6 @@
 ## 0 项目概述
 
-项目在线体验地址（推荐国内）：http://60.204.149.135
+项目在线体验地址（推荐国内）：~~http://60.204.149.135~~ 原服务器已过期，新地址http://106.54.34.76
 
 针对某个区的农产品大棚种植情况进行管理。
 
@@ -8,13 +8,21 @@
 
 ## 1 部署
 
-正常网络环境下，使用IE、Firefox等浏览器输入IP地址：http://60.204.149.135 即可访问系统。
+正常网络环境下，使用IE、Firefox等浏览器输入IP地址：~~http://60.204.149.135~~ 即可访问系统。
+ubuntu22.04
+conda 23.3.1
+Python-3.8.19
+java -version
+openjdk version "1.8.0_402"
+OpenJDK Runtime Environment (build 1.8.0_402-8u402-ga-2ubuntu1~22.04-b06)
+OpenJDK 64-Bit Server VM (build 25.402-b06, mixed mode)
+
 
 ## 2 使用/功能介绍
 
 本系统有5个功能栏，分别为首页大屏、传感器管理、病虫害识别、大棚管理和农产品种植物管理。
 
-后端项目启动smartalg/server.py,外层目录用于yolov5训练，使用python3.8，`pip install -r requirements.txt`
+后端项目启动smartalg/server.py,外层目录用于yolov5训练，使用~~python3.8~~ python3.8.19，`pip install -r requirements.txt`
 
 ```bash
 SmartAgriculture
